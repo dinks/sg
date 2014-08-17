@@ -5,7 +5,9 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+##Ruby Version
+
+Required > 2.0
 
 * System dependencies
 
