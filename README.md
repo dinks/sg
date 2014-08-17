@@ -1,30 +1,29 @@
-== README
+##README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a test application which access Picasaweb data for `albums` and `photos` for an authorized user.
 
-Things you may want to cover:
+It uses `Angularjs` as the front end.
 
-##Ruby Version
+####Ruby Version
 
 Required > 2.0
 
-* System dependencies
+####Configuration
 
-* Configuration
+Set up the `.env` file with your custom variables such as
 
-* Database creation
+`GOOGLE_API_KEY`
+`GOOGLE_CLIENT_ID`
+`GOOGLE_CLIENT_SECRET`
 
-* Database initialization
+####Database creation
 
-* How to run the test suite
+No database required. I have not taken off the gems for this though.
 
-* Services (job queues, cache servers, search engines, etc.)
+####How to run the test suite
 
-* Deployment instructions
+`be guard` or `be rake konacha:serve`
 
-* ...
+####License
 
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Free to learn
