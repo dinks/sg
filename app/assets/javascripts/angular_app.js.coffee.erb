@@ -1,41 +1,26 @@
-console.log "Initializing Angular App"
-app = angular.module( "HappySeed", ["ngResource", "ngRoute"])
+# GAPI is used for authentication
+jQuery ->
+  $.ajax(
+    url: 'https://apis.google.com/js/client:plus.js?onload=googleLoad'
+    dataType: 'script'
+    cache: true
+  )
 
-app.config(["$httpProvider", (p) ->
-  m = document.getElementsByTagName('meta')
-  for i in m 
-    p.defaults.headers.common['X-CSRF-Token'] = i.content if i.name == 'csrf-token'
-])
+window.googleLoad = ->
+  gapi.client.setApiKey '<%= ENV["GOOGLE_API_KEY"] %>'
 
-app.config(['$routeProvider', ($routeProvider) ->
-  $routeProvider.    when('/landing',            {templateUrl: '<%= asset_path('landing.html' )%>',  controller: 'LandingCtrl'}).
+angular
+.module 'env', []
+.constant 'env',
+  'clientId':     '<%= ENV["GOOGLE_CLIENT_ID"] %>'
+  'clientSecret': '<%= ENV["GOOGLE_CLIENT_SECRET"] %>'
 
-
-    otherwise({redirectTo: '/landing'});
-])
-
-
-safeApply = (scope, fn) ->
-  if( scope.$$phase || scope.$root.$$phase )
-    fn()
-  else
-    scope.$apply(fn)
-
-app.directive 'onEsc', ->
-  link: (scope, elm, attr) ->
-    elm.bind 'keydown', (e)->
-      if( e.keyCode == 27 )
-        scope.$apply attr.onEsc
-
-app.directive 'onEnter', ->
-  link: (scope, elm, attr) ->
-    elm.bind 'keydown', (e) ->
-      if( e.keyCode == 13 )
-        scope.$apply attr.onEnter
-
-app.directive 'onTab', ->
-  link: (scope, elm, attr) ->
-    elm.bind 'keydown', (e) ->
-      if( e.keyCode == 9 )
-        e.preventDefault()
-        scope.$apply attr.onTab
+angular
+.module 'sgPicasaViewer',
+  [ 'ngResource',
+    'ngRoute',
+    'ngAnimate',
+    'ui.bootstrap',
+    'dialogs',
+    'env'
+  ]

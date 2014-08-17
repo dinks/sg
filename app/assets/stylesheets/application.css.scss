@@ -5,3 +5,13 @@
 
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+@import 'font-awesome';
+
+@import 'angular_dialogs';
+@import 'angular_animations';
+
+footer {
+  background-color: $footer-background;
+  color: $footer-color;
+  @include opacity(0.7);
+}

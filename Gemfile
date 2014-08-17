@@ -41,6 +41,7 @@ gem 'spring',        group: :development
 
 gem "haml-rails"
 group :development, :test do
+  gem "powder"
   gem "sqlite3"
   gem "rspec"
   gem "rspec-rails"
@@ -48,6 +49,11 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "autotest-rails"
   gem "capybara"
+  gem "poltergeist"
+
+  gem "konacha"
+  gem "konacha-chai-matchers"
+  gem "guard-konacha"
 end
 
 group :test do
@@ -64,6 +70,7 @@ gem "rdiscount", groups: [:development, :test]
 gem "unicorn"
 gem "rails_12factor"
 gem "bootstrap-sass"
+gem "font-awesome-rails"
 gem "modernizr-rails"
 gem "meta-tags", require: "meta_tags"
 gem "angularjs-rails"

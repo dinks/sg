@@ -1,0 +1,18 @@
+<back-button back="All Albums"></back-button>
+
+<hr>
+
+<div class="row photos" ng-if="photos">
+  <div class="col-sm-6 col-md-4" ng-repeat="photo in photos">
+    <div class="thumbnail">
+      <img ng-src="{{ photo.media$group.media$content[0].url }}" alt="{{ photo.title.$t }}">
+      <div class="caption">
+        <h3>{{ photo.title.$t }}</h3>
+        <p>{{ photo.summary.$t }}</p>
+        <p>
+          <a class="btn btn-primary" ng-click="addComment(photo.gphoto$id.$t)" role="button">Add Comment</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

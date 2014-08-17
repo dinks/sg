@@ -1,0 +1,14 @@
+<div class="row albums" ng-if="albums">
+  <div class="col-sm-6 col-md-4" ng-repeat="album in albums">
+    <div class="thumbnail">
+      <img ng-src="{{ album.media$group.media$content[0].url }}" alt="{{ album.title.$t }}">
+      <div class="caption">
+        <h3>{{ album.title.$t }}</h3>
+        <p>{{ album.summary.$t }}</p>
+        <p>
+          <a href="#/album/{{ album.gphoto$id.$t }}" class="btn btn-primary" role="button">View Photos</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

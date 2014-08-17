@@ -1,0 +1,46 @@
+AlbumCtrl = ($scope, $routeParams, $modal, SgPicasaService, SgCache)->
+  $scope.albumId  = $routeParams.albumId
+  $scope.photos    = null
+
+  $scope.addComment = (photoId)->
+    modalInstance = $modal.open
+      templateUrl: '<%= asset_path('dialogs/comment.html' )%>'
+      controller: commentModalCtrl
+      size: 'lg'
+
+    modalInstance.result.then (comment)->
+      SgPicasaService
+      .postComment $scope.albumId, photoId, comment
+      .then (data)->
+        console.log 'Commented!!!!'
+    , ->
+
+    return
+
+  init = ->
+    cachedPhotos = SgCache.get 'album-' + $scope.albumId
+    if cachedPhotos
+      $scope.photos = cachedPhotos
+    else
+      SgPicasaService
+      .getAlbum($scope.albumId)
+      .then (data)->
+        $scope.photos = data.feed.entry
+        SgCache.put 'album-' + $scope.albumId, data.feed.entry
+
+  init()
+
+AlbumCtrl.$inject = ['$scope', '$routeParams', '$modal', 'SgPicasaService', 'SgCache']
+
+commentModalCtrl = ($scope, $modalInstance)->
+  $scope.comment = null
+
+  $scope.postComment = (comment)->
+    $modalInstance.close comment
+
+  $scope.cancel = ->
+    $modalInstance.dismiss 'cancel'
+
+angular
+.module 'sgPicasaViewer'
+.controller 'AlbumCtrl', AlbumCtrl

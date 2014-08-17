@@ -1,0 +1,29 @@
+//= require spec_helper
+
+describe 'backButton', ->
+  $compile    = null
+  $rootScope  = null
+  $dir        = null
+
+  beforeEach module('sgPicasaViewer')
+
+  beforeEach inject ['$templateCache', ($templateCache)->
+    template = '/assets/common/back.html'
+    content  = """
+      <%= IO.read Rails.root.join('app/assets/templates/common/back.html') %>
+    """
+    $templateCache.put template, content
+  ]
+
+  beforeEach inject ['$compile', '$rootScope', (compile, rootScope)->
+    $compile    = compile
+    $rootScope  = rootScope
+    $dir = angular.element('<back-button back="BACK"></back-button>')
+    compile($dir)($rootScope)
+    $rootScope.$digest();
+  ]
+
+  it 'should display the button', ->
+    expect($dir.html()).to.match(/btn.*btn-info.*BACK/i)
+
+  return

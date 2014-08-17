@@ -12,10 +12,17 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.topics
 //= require bootstrap-sprockets
 //= require angular
 //= require angular-animate
 //= require angular-resource
 //= require angular-route
+//= require ui-bootstrap-tpls-0.6.0
+//= require angular_dialogs.min
 //= require angular_app
+//= require angular_routes
+//= require_tree ./common
+//= require_tree ./directives
+//= require_tree ./services
 //= require_tree ./controllers

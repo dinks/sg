@@ -2,8 +2,9 @@
 %html.no-js
   = render 'head'
 
-  %body{ :class => "#{ controller.controller_name }", "ng-app" => "HappySeed"}
+  %body{ :class => "#{ controller.controller_name }", "ng-app" => "sgPicasaViewer"}
     = render 'chromeframe'
+    = render 'angular_polyfill'
     .container
       = render 'header'
       = render 'flashes'

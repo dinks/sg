@@ -1,0 +1,44 @@
+loginRequired = ($location, $q, AuthenticationService)->
+  deferred = $q.defer()
+  if !AuthenticationService.isSignedIn()
+    deferred.reject()
+    $location.path '/login'
+  else
+    deferred.resolve()
+  deferred.promise
+
+redirectIfAuthenticated = (route)->
+  return ($location, $q, AuthenticationService)->
+    deferred = $q.defer();
+    if AuthenticationService.isSignedIn()
+      deferred.reject()
+      $location.path route
+    else
+      deferred.resolve()
+    deferred.promise
+
+routes = ($routeProvider) ->
+  $routeProvider
+    .when '/login',
+      templateUrl: '<%= asset_path('login.html' )%>'
+      controller: 'LoginCtrl'
+      resolve:
+        redirectIfAuthenticated: redirectIfAuthenticated('/albums')
+    .when '/albums',
+      templateUrl: '<%= asset_path('albums.html' )%>'
+      controller: 'AlbumsCtrl'
+      resolve:
+        loginRequired: loginRequired
+    .when '/album/:albumId',
+      templateUrl: '<%= asset_path('album.html' )%>'
+      controller: 'AlbumCtrl'
+      resolve:
+        loginRequired: loginRequired
+    .otherwise
+      redirectTo: '/login'
+
+routes.$inject = ['$routeProvider']
+
+angular
+.module 'sgPicasaViewer'
+.config routes

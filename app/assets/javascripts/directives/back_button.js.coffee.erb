@@ -1,0 +1,17 @@
+backButton = ->
+  restrict: 'E'
+  templateUrl: '<%= asset_path('common/back.html') %>'
+  scope:
+    back: '@back'
+  link: ($scope, element, attrs)->
+    $scope.goBack = ->
+      history.back()
+      return
+    return
+
+backButton.$inject = ['$rootScope']
+
+angular
+.module 'sgPicasaViewer'
+.directive 'backButton', backButton
+
